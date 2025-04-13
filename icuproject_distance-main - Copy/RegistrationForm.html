@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <!-- Internal CSS -->
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+    @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css);
+
+    :root {
+      /* Colors */
+      --primary-color: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3f37c9;
+      --secondary-color: #f72585;
+      --text-dark: #333333;
+      --text-light: #666666;
+      --background: #f8f9fa;
+      --white: #ffffff;
+      --success: #4caf50;
+      --error: #f44336;
+      --error-light: rgba(244, 67, 54, 0.05);
+      
+      /* Spacing */
+      --spacing-xs: 5px;
+      --spacing-sm: 8px;
+      --spacing-md: 15px;
+      --spacing-lg: 20px;
+      --spacing-xl: 30px;
+      
+      /* UI Elements */
+      --border-radius: 8px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --input-padding: 12px 15px;
+      --input-height: 45px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #f0f2f0, #000c40); 
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      body {
+        animation: gradient 15s ease infinite;
+      }
+      
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    }
+
+    .wrapper {
+      max-width: 800px;
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+    }
+
+    /* Add the rest of your CSS here */
+    .title h1 {
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-sm);
+}
+
+.title h1 a {
+  color: var(--white); 
+  text-decoration: none; 
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.title h1 a:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+.title .subtitle {
+  display: flex;
+  align-items: center; 
+  gap: var(--spacing-md); 
+}
+
+.title i {
+  font-size: 22px;
+}
+
+.title h2 {
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+
+.form {
+  padding: var(--spacing-xl);
+}
+
+.form-section {
+  margin-bottom: var(--spacing-xl);
+  background: var(--background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .form-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .form-section:nth-child(1) { animation-delay: 0.1s; }
+  .form-section:nth-child(2) { animation-delay: 0.2s; }
+  .form-section:nth-child(3) { animation-delay: 0.3s; }
+  .form-section:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.form-section h2 {
+  font-size: 18px;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid #eee;
+}
+
+.inputfield {
+  margin-bottom: var(--spacing-lg);
+}
+
+.inputfield label {
+  display: block;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-sm);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input,
+.textarea,
+.custom-select select {
+  width: 100%;
+  padding: var(--input-padding);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  transition: var(--transition);
+  background: var(--white);
+}
+
+.input:focus,
+.textarea:focus,
+.custom-select select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+  outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #aaa;
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.two-column-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.two-column-group .inputfield {
+  flex: 1;
+}
+
+/* Custom Select Styles */
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.custom-select:after {
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--primary-color);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Radio Group Styles */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  margin-right: var(--spacing-md);
+}
+
+.radio-option input[type="radio"],
+.checkbox-option input[type="checkbox"] {
+  display: none;
+}
+
+.radio-option label,
+.checkbox-option label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.radio-option label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.radio-option input[type="radio"]:checked + label:before {
+  border-color: var(--primary-color);
+}
+
+.radio-option label:after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  transition: var(--transition);
+  opacity: 0;
+}
+
+.radio-option input[type="radio"]:checked + label:after {
+  opacity: 1;
+}
+
+/* Checkbox Styles */
+.checkbox-option label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.checkbox-option input[type="checkbox"]:checked + label:before {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.checkbox-option label:after {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--white);
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: var(--transition);
+  opacity: 0;
+}
+
+.checkbox-option input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+/* Phone Input */
+.phone-input {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.phone-input .custom-select {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.phone-input input {
+  flex-grow: 1;
+}
+
+/* File Upload Styles */
+.file-upload {
+  position: relative;
+}
+
+.input-file {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  background: var(--primary-light);
+  color: var(--white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  width: max-content;
+}
+
+.file-label:hover {
+  background: var(--primary-color);
+}
+
+.file-label i {
+  margin-right: var(--spacing-sm);
+  color: var(--white);
+}
+
+.file-label span {
+  color: var(--white);
+}
+
+.file-info {
+  margin-top: var(--spacing-sm);
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* Terms Checkbox */
+.terms {
+  display: flex;
+  align-items: flex-start;
+}
+
+.terms .check {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: var(--spacing-md);
+  margin-top: 3px;
+}
+
+.terms .check input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.terms .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.terms .check input[type="checkbox"]:checked ~ .checkmark {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.terms .checkmark:after {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.terms .check input[type="checkbox"]:checked ~ .checkmark:after {
+  display: block;
+}
+
+.terms p {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Password Strength */
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  transition: var(--transition);
+}
+
+.toggle-password:hover {
+  color: var(--primary-color);
+}
+
+.password-strength {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.password-strength .bar {
+  height: 4px;
+  width: 25%;
+  background: #eee;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+#password-message {
+  margin-top: var(--spacing-xs);
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+/* Button Styles */
+.btns {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.btn {
+  flex: 1;
+  padding: var(--input-padding);
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-primary:active {
+  background: var(--primary-light);
+}
+
+.btn-primary.clicked {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background: #eee;
+  color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+  background: #ddd;
+}
+
+.btn-secondary:active {
+  background: #ccc;
+}
+
+.btn-secondary.clicked {
+  background: #ddd;
+  color: var(--text-dark);
+}
+
+.btn i {
+  margin-right: var(--spacing-sm);
+}
+
+.btn-remove-file {
+  display: inline-block;
+  margin-top: var(--spacing-md);
+  background: var(--error);
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 12px;
+  transition: var(--transition);
+}
+
+.btn-remove-file:hover {
+  background: #d32f2f;
+}
+
+.btn-remove-file i {
+  margin-right: var(--spacing-xs);
+}
+
+/* Input validation styles */
+.input.invalid,
+.textarea.invalid,
+.custom-select.invalid select {
+  border-color: var(--error);
+  background-color: var(--error-light);
+}
+
+.file-upload.invalid .file-label {
+  border-color: var(--error);
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+.radio-group.invalid .radio-option label:before,
+.checkbox-group.invalid .checkbox-option label:before,
+.terms.invalid .checkmark {
+  border-color: var(--error);
+  background-color: var(--error-light);
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 12px;
+  margin-top: var(--spacing-xs);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .error-message {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wrapper {
+    margin: var(--spacing-xl) var(--spacing-sm);
+  }
+
+  .form {
+    padding: var(--spacing-lg);
+  }
+
+  .form-section {
+    padding: var(--spacing-lg);
+  }
+
+  .btns {
+    flex-direction: column;
+  }
+  
+  .two-column-group {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .phone-input {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .phone-input .custom-select {
+    width: 100%;
+  }
+
+  .radio-group,
+  .checkbox-group {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .radio-option,
+  .checkbox-option {
+    margin-right: 0;
+  }
+  
+  .file-label {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Accessibility - support for prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .form-section,
+  .error-message,
+  body {
+    animation: none !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="title">
+      <h1>Student Registration Form</h1>
+    </div>
+    <form class="form">
+      <!-- Add your form fields here -->
+      method="POST"
+      action="#"
+      data-netlify="true"
+      name="student-registration-form"
+      <div class="form">
+        <div class="form-section">
+          <h2>Personal Information</h2>
+
+          <div class="inputfield">
+            <label for="fname">First Name</label>
+            <input
+              type="text"
+              class="input"
+              id="fname"
+              name="fname"
+              placeholder="Enter your first name"
+              maxlength="30"
+              pattern="[A-Za-z\s\-]{1,32}"
+              title="Please enter valid name"
+              required
+            />
+          </div>
+
+          <div class="inputfield">
+            <label for="lname">Last Name</label>
+            <input
+              type="text"
+              class="input"
+              id="lname"
+              name="lname"
+              placeholder="Enter your last name"
+              maxlength="30"
+              pattern="[A-Za-z\s\-]{1,32}"
+              title="Please enter valid name"
+              required
+            />
+          </div>
+
+          <div class="inputfield">
+            <label>Gender</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="male"
+                  value="Male"
+                  required
+                />
+                <label for="male">Male</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="female"
+                  value="Female"
+                />
+                <label for="female">Female</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="gender" id="other" value="Other" />
+                <label for="other">Other</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label for="dob">Date of Birth</label>
+            <input type="date" class="input" id="dob" name="dob" required />
+          </div>
+
+          <div class="inputfield">
+            <label for="age">Age</label>
+            <input
+              type="text"
+              class="input"
+              id="age"
+              name="age"
+              placeholder="Age will be calculated automatically"
+              readonly
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Contact Information</h2>
+
+          <div class="inputfield">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              class="input"
+              id="email"
+              name="email"
+              aria-label="Email Address"
+              placeholder="Enter your email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
+              title="Please enter valid email"
+              required
+            />
+          </div>
+
+          <div class="inputfield">
+            <label for="phone-number">Phone Number</label>
+            <div class="phone-input">
+              <div class="custom-select">
+                <select id="phone-code" name="phone-code">
+                  <option value="+26">+26</option>
+                </select>
+              </div>
+              <input
+                type="tel"
+                class="input"
+                name="phone-number"
+                maxlength="10"
+                id="phone-number"
+                placeholder="Enter your phone number"
+                pattern="[6-9]{1}[0-9]{9}"
+                title="Please enter valid phone number"
+              />
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label for="address">Address</label>
+            <textarea
+              class="textarea"
+              name="address"
+              id="address"
+              rows="3"
+              placeholder="Enter your address"
+              maxlength="100"
+              required
+            ></textarea>
+          </div>
+
+          <div class="two-column-group">
+            <div class="inputfield">
+              <label for="state">State</label>
+              <div class="custom-select" required>
+                <select id="state" name="state" required>
+                  <option hidden>Select your town </option>
+                  <option value="kitwe">
+                    kitwe
+                  </option>
+                  <option value="Lusaka">Lusaka</option>
+                  <option value="Mazabuka">Mazabuka</option>
+                  <option value="Choma">Choma</option>
+                  <option value="Mbika">Mbika</option>
+                  <option value="Maamba">Maamba</option>
+                  <option value="Chingola">Chingola</option>
+                  <option value="Livingstone">
+                    Livingstone
+                  </option>
+                  <option value="Kalomo">Kalomo</option>
+                  <option value="Serenji">Serenji</option>
+                  <option value="Chipata">Chiapata</option>
+                  <option value="Mongu">Mongu</option>
+                  <option value="Kasama">Kasama</option>
+                  <option value="Kafue">Kafue</option>
+                  <option value="Chilanga">Chilanga</option>
+                  <option value="Solwezi">Solwezi</option>
+                  <option value="Monze">Monze</option>
+                  <option value="Kolwezi">Kolwezi</option>
+                  <option value="Chinunu">Chinunu</option>
+                  <option value="Chinsali">Chansali</option>
+                  <option value="Chama">Chama</option>
+                  <option value="Mpulungu">Mpulungu</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Petauke">Petauke</option>
+                  <option value="Nakonde">Nakonde</option>
+                  <option value="Zimba">Zimba</option>
+                  <option value="Chirundu">Chirudu</option>
+                  <option value="Siavonga">Siavonga</option>
+                  <option value="Namwala">Namwala</option>
+                  <option value="Ndola">Ndola</option>
+                  <option value="Kapiri">Kapiri</option>
+                  <option value="Nakonde">Nakonde</option>
+                  <option value="Chibobo">Chibobo</option>
+                  <option value="Chililamobwe">Chililamobwe</option>
+                  <option value="Mbala">Mbala</option>
+                  <option value="Kabwe">Kabwe</option>
+                  <option value="Chavuma">Chavuma</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="inputfield">
+              <label for="pincode">Pin Code</label>
+              <input
+                type="text"
+                class="input"
+                id="pincode"
+                name="pincode"
+                placeholder="Enter your pin code"
+                maxlength="6"
+                pattern="^[0-9]{6}$"
+                title="Please enter valid pin code"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Security Information</h2>
+
+          <div class="inputfield">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input
+                type="password"
+                class="input"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="off"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}"
+                title="Password must be atleast 10 characters with an uppercase, lowercase, number, and special character (@,$,!,%,?,&)."
+                minlength="10"
+                required
+              />
+              <i
+                class="fas fa-eye toggle-password"
+                data-target="password"
+              ></i>
+            </div>
+            <div class="password-strength">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="password-container">
+              <input
+                type="password"
+                class="input"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm password"
+                autocomplete="off"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}"
+                title="Must match the password exactly"
+                minlength="10"
+                required
+              />
+              <i
+                class="fas fa-eye toggle-password"
+                data-target="confirm-password"
+              ></i>
+            </div>
+          </div>
+          <div id="password-message"></div>
+        </div>
+
+        <div class="form-section">
+          <h2>Additional Information</h2>
+
+          <div class="inputfield">
+            <label>Hobbies</label>
+            <div class="checkbox-group" required>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="music"
+                  value="Music"
+                />
+                <label for="music">Music</label>
+              </div>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="movies"
+                  value="Movies"
+                />
+                <label for="movies">Movies</label>
+              </div>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="sports"
+                  value="Sports"
+                />
+                <label for="sports">Sports</label>
+              </div>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="travel"
+                  value="Travel"
+                />
+                <label for="travel">Travel</label>
+              </div>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="reading"
+                  value="Reading"
+                />
+                <label for="reading">Reading</label>
+              </div>
+              <div class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  id="gaming"
+                  value="Gaming"
+                />
+                <label for="gaming">Gaming</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label for="myfile">Profile Photo</label>
+            <div class="file-upload">
+              <input
+                type="file"
+                name="myfile"
+                id="myfile"
+                class="input-file"
+                accept="image/*"
+                required
+              />
+              <label for="myfile" class="file-label">
+                <i class="fas fa-upload"></i>
+                <span>Choose a file</span>
+              </label>
+              <div class="file-info">No file chosen (Max size: 2MB)</div>
+              <button
+                type="button"
+                id="remove-file"
+                class="btn-remove-file"
+                style="display: none"
+                required
+              >
+                <i class="fas fa-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+
+          <div class="inputfield terms">
+            <label class="check">
+              <input type="checkbox" name="check" value="Declared" required />
+              <span class="checkmark"></span>
+            </label>
+            <p>
+              I hereby declare that the above information provided is true and
+              correct.
+            </p>
+          </div>
+
+          <div class="inputfield" required>
+            <div data-netlify-recaptcha="true"></div>
+          </div>
+
+          <div class="inputfield btns">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i> Register
+            </button>
+            <button type="reset" class="btn btn-secondary">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Internal JavaScript -->
+  <script>
+    // Example JavaScript functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('Page loaded'); 
+      // Add your JavaScript code here
+      const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirm-password");
+  const passwordMessage = document.getElementById("password-message");
+  const strengthBars = document.querySelectorAll(".password-strength .bar");
+  const form = document.querySelector("form");
+
+  // Input fields validation mapping - updated to match HTML patterns
+  const validationConfig = {
+    fname: {
+      pattern: /^[A-Za-z]{1,32}$/,
+      message:
+        "First name should contain only letters (max 30 characters)",
+    },
+    lname: {
+      pattern: /^[A-Za-z]{1,32}$/,
+      message:
+        "Last name should contain only letters (max 30 characters)",
+    },
+    age: {
+      pattern: /^(1[5-9]|[2-9][0-9])$/,
+      message: "Age must be between 15 and 99",
+    },
+    email: {
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
+      message: "Please enter a valid email address",
+    },
+    "phone-number": {
+      pattern: /^[6-9][0-9]{9}$/,
+      message: "Phone number must start with 6-9 and have 10 digits",
+    },
+    pincode: {
+      pattern: /^[0-9]{6}$/,
+      message: "Pin code must be a 6-digit number",
+    },
+    password: {
+      pattern:
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/,
+      message:
+        "Password must be atleast 10 characters with an uppercase, lowercase, number, and special character (@,$,!,%,?,&).",
+    },
+  };
+
+  // Add validation to all required inputs
+  const inputs = document.querySelectorAll(
+    "input[required], select[required], textarea[required]"
+  );
+
+  inputs.forEach((input) => {
+    // Skip radio buttons and checkboxes for this type of validation
+    if (
+      input.type === "radio" ||
+      input.type === "checkbox" ||
+      input.type === "file"
+    )
+      return;
+
+    // Add blur event for validation
+    input.addEventListener("blur", function () {
+      validateInput(this);
+    });
+
+    // Add input event for real-time validation
+    input.addEventListener("input", function () {
+      // Remove error as user types
+      this.classList.remove("invalid");
+      const errorMsg = this.nextElementSibling;
+      if (errorMsg && errorMsg.classList.contains("error-message")) {
+        errorMsg.remove();
+      }
+    });
+  });
+
+  // Date of Birth validation
+  const dobInput = document.getElementById("dob");
+  dobInput.addEventListener("blur", function () {
+    const selectedDate = new Date(this.value);
+    const today = new Date();
+    const minAge = 15;
+    const maxAge = 99;
+
+    // Calculate max and min valid dates
+    const minValidDate = new Date();
+    minValidDate.setFullYear(today.getFullYear() - maxAge);
+
+    const maxValidDate = new Date();
+    maxValidDate.setFullYear(today.getFullYear() - minAge);
+
+    if (selectedDate > maxValidDate || selectedDate < minValidDate) {
+      showError(
+        this,
+        `Date of birth must indicate an age between ${minAge} and ${maxAge} years`
+      );
+      // Clear the age field
+      const ageInput = document.getElementById("age");
+      if (ageInput) {
+        ageInput.value = "";
+      }
+    } else {
+      clearError(this);
+      // Recalculate age
+      calculateAge();
+    }
+  });
+
+  // Password strength indicator
+  passwordInput.addEventListener("input", function () {
+    const password = this.value;
+    const strength = checkPasswordStrength(password);
+
+    // Update strength bars
+    strengthBars.forEach((bar, index) => {
+      if (index < strength) {
+        bar.style.backgroundColor = getColorForStrength(strength);
+      } else {
+        bar.style.backgroundColor = "#eee";
+      }
+    });
+
+    // Check password match
+    if (confirmPasswordInput.value) {
+      checkPasswordMatch();
+    }
+  });
+
+  // Password and confirm password match - fixed version
+  function checkPasswordMatch() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (confirmPassword.length === 0) {
+      passwordMessage.textContent = "";
+      confirmPasswordInput.classList.remove("invalid");
+      return;
+    }
+
+    if (password === confirmPassword) {
+      passwordMessage.textContent = "✅ Passwords match";
+      passwordMessage.style.color = "var(--success)";
+      confirmPasswordInput.classList.remove("invalid");
+      clearError(confirmPasswordInput);
+    } else {
+      passwordMessage.textContent = "❌ Passwords do not match";
+      passwordMessage.style.color = "var(--error)";
+      confirmPasswordInput.classList.add("invalid");
+    }
+  }
+
+  // Listen for changes in the Confirm Password field
+  confirmPasswordInput.addEventListener("input", checkPasswordMatch);
+
+  function checkPasswordStrength(password) {
+    let strength = 0;
+
+    if (password.length >= 10) strength += 1;
+    if (/[a-z]/.test(password)) strength += 1;
+    if (/[A-Z]/.test(password)) strength += 1;
+    if (/[0-9]/.test(password)) strength += 1;
+    if (/[@$!%*?&]/.test(password)) strength += 1;
+
+    return strength;
+  }
+
+  function getColorForStrength(strength) {
+    switch (strength) {
+      case 1:
+        return "#f44336"; // Very weak - red
+      case 2:
+        return "#ff5722"; // Weak - dark orange
+      case 3:
+        return "#ff9800"; // Medium - orange
+      case 4:
+        return "#ffc107"; // Good - yellow
+      case 5:
+        return "#4caf50"; // Strong - green
+      default:
+        return "#eee";
+    }
+  }
+
+  // Toggle password visibility
+  const togglePasswordButtons = document.querySelectorAll(".toggle-password");
+
+  togglePasswordButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const targetId = this.getAttribute("data-target");
+      const targetInput = document.getElementById(targetId);
+
+      if (targetInput.type === "password") {
+        targetInput.type = "text";
+        this.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        targetInput.type = "password";
+        this.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    });
+  });
+
+  // File upload handling
+  const fileInput = document.getElementById("myfile");
+  const fileInfo = document.querySelector(".file-info");
+  const fileLabel = document.querySelector(".file-label span");
+  const removeFileBtn = document.getElementById("remove-file");
+
+  fileInput.addEventListener("change", function () {
+    if (this.files.length > 0) {
+      const fileName = this.files[0].name;
+      const fileSize = this.files[0].size / 1024; 
+      const maxSize = 2048; 
+
+      if (fileSize > maxSize) {
+        showError(this, "File is too big! Maximum size is 2MB.");
+        this.value = "";
+        fileInfo.textContent = "No file chosen (Max size: 2MB)";
+        fileLabel.textContent = "Choose a file";
+        removeFileBtn.style.display = "none";
+      } else {
+        fileLabel.textContent = fileName;
+        fileInfo.textContent = `${fileName} (${(fileSize / 1024).toFixed(
+          2
+        )} MB)`;
+        clearError(this);
+        removeFileBtn.style.display = "inline-block";
+      }
+    } else {
+      fileInfo.textContent = "No file chosen (Max size: 2MB)";
+      fileLabel.textContent = "Choose a file";
+      removeFileBtn.style.display = "none";
+    }
+  });
+
+  // Remove file functionality
+  removeFileBtn.addEventListener("click", function () {
+    fileInput.value = "";
+    fileInfo.textContent = "No file chosen (Max size: 2MB)";
+    fileLabel.textContent = "Choose a file";
+    this.style.display = "none";
+    clearError(fileInput);
+  });
+
+  // Helper function to validate a single input
+  function validateInput(input) {
+    // Skip if input is empty and not required
+    if (!input.value && !input.hasAttribute("required")) {
+      return true;
+    }
+
+    // Get validation rules
+    const config = validationConfig[input.id] || validationConfig[input.name];
+
+    if (config && config.pattern) {
+      if (!config.pattern.test(input.value)) {
+        showError(input, config.message);
+        return false;
+      } else {
+        clearError(input);
+        return true;
+      }
+    }
+
+    // If no specific validation but required and empty
+    if (input.hasAttribute("required") && !input.value) {
+      showError(input, "This field is required");
+      return false;
+    }
+
+    clearError(input);
+    return true;
+  }
+
+  // Helper function to show error message
+  function showError(input, message) {
+    clearError(input); // Remove any existing error first
+
+    input.classList.add("invalid");
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "error-message";
+    errorMsg.textContent = message;
+
+    // Special handling for elements with parent containers
+    if (
+      input.closest(".password-container") ||
+      input.closest(".phone-input") ||
+      input.closest(".file-upload") ||
+      input.closest(".custom_select")
+    ) {
+      let parent;
+      if (input.closest(".password-container")) {
+        parent = input.closest(".password-container");
+      } else if (input.closest(".phone-input")) {
+        parent = input.closest(".phone-input");
+      } else if (input.closest(".file-upload")) {
+        parent = input.closest(".file-upload");
+      } else if (input.closest(".custom_select")) {
+        parent = input.closest(".custom_select");
+      }
+
+      if (
+        parent &&
+        !parent.nextElementSibling?.classList.contains("error-message")
+      ) {
+        parent.insertAdjacentElement("afterend", errorMsg);
+      }
+    } else {
+      // Normal inputs
+      if (!input.nextElementSibling?.classList.contains("error-message")) {
+        input.insertAdjacentElement("afterend", errorMsg);
+      }
+    }
+  }
+
+  // Helper function to clear error
+  function clearError(input) {
+    input.classList.remove("invalid");
+
+    // Check for special containers
+    if (
+      input.closest(".password-container") ||
+      input.closest(".phone-input") ||
+      input.closest(".file-upload") ||
+      input.closest(".custom_select")
+    ) {
+      let parent;
+      if (input.closest(".password-container")) {
+        parent = input.closest(".password-container");
+      } else if (input.closest(".phone-input")) {
+        parent = input.closest(".phone-input");
+      } else if (input.closest(".file-upload")) {
+        parent = input.closest(".file-upload");
+      } else if (input.closest(".custom_select")) {
+        parent = input.closest(".custom_select");
+      }
+
+      if (
+        parent &&
+        parent.nextElementSibling?.classList.contains("error-message")
+      ) {
+        parent.nextElementSibling.remove();
+      }
+    } else {
+      // Normal inputs
+      if (input.nextElementSibling?.classList.contains("error-message")) {
+        input.nextElementSibling.remove();
+      }
+    }
+  }
+
+  // Validate radio button groups
+  function validateRadioGroup(name) {
+    const radioButtons = document.querySelectorAll(
+      `input[type="radio"][name="${name}"]`
+    );
+    const anyChecked = Array.from(radioButtons).some((radio) => radio.checked);
+
+    if (!anyChecked) {
+      // Find the container and add error
+      const container = radioButtons[0].closest(".inputfield");
+      const errorMsg = document.createElement("div");
+      errorMsg.className = "error-message";
+      errorMsg.textContent = "Please select an option";
+
+      if (!container.querySelector(".error-message")) {
+        container.appendChild(errorMsg);
+      }
+      return false;
+    } else {
+      // Clear error if exists
+      const container = radioButtons[0].closest(".inputfield");
+      const existingError = container.querySelector(".error-message");
+      if (existingError) {
+        existingError.remove();
+      }
+      return true;
+    }
+  }
+
+  // Form validation before submit
+  form.addEventListener("submit", function (e) {
+    let isValid = true;
+
+    // Validate all required inputs
+    inputs.forEach((input) => {
+      if (input.type !== "radio" && input.type !== "checkbox") {
+        if (!validateInput(input)) {
+          isValid = false;
+        }
+      }
+    });
+
+    // Validate radio groups
+    const genderValid = validateRadioGroup("gender");
+    if (!genderValid) isValid = false;
+
+    // Validate password match
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      showError(confirmPasswordInput, "Passwords do not match");
+      isValid = false;
+    }
+
+    // Validate file input
+    if (fileInput.hasAttribute("required") && !fileInput.files.length) {
+      showError(fileInput, "Please select a file");
+      isValid = false;
+    }
+
+    // Validate hobbies (at least one selected) if any exist
+    const hobbiesCheckboxes = document.querySelectorAll(
+      'input[name="hobbies"]'
+    );
+    if (hobbiesCheckboxes.length > 0) {
+      const anyChecked = Array.from(hobbiesCheckboxes).some((cb) => cb.checked);
+      if (!anyChecked) {
+        const container = hobbiesCheckboxes[0].closest(".inputfield");
+        const errorMsg = document.createElement("div");
+        errorMsg.className = "error-message";
+        errorMsg.textContent = "Please select at least one hobby";
+
+        if (!container.querySelector(".error-message")) {
+          container.appendChild(errorMsg);
+        }
+        isValid = false;
+      } else {
+        const container = hobbiesCheckboxes[0].closest(".inputfield");
+        const existingError = container.querySelector(".error-message");
+        if (existingError) {
+          existingError.remove();
+        }
+      }
+    }
+
+    if (!isValid) {
+      e.preventDefault();
+      // Scroll to the first error
+      const firstError = document.querySelector(".invalid, .error-message");
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      // Show alert
+      alert("Please fix the errors before submitting.");
+    }
+  });
+
+  const secondaryButton = document.querySelector(".btn-secondary");
+  // Handle form reset for all UI elements and error messages
+  secondaryButton.addEventListener("click", function () {
+    // Reset file input UI
+    fileInput.value = "";
+    fileLabel.textContent = "Choose a file";
+    fileInfo.textContent = "No file chosen (Max size: 2MB)";
+    removeFileBtn.style.display = "none";
+
+    // Reset password strength bars
+    const strengthBars = document.querySelectorAll(".password-strength .bar");
+    strengthBars.forEach((bar) => {
+      bar.style.backgroundColor = "#eee";
+    });
+
+    // Reset password message
+    const passwordMessage = document.getElementById("password-message");
+    if (passwordMessage) {
+      passwordMessage.textContent = "";
+    }
+
+    // Remove all error messages and invalid classes
+    const allErrorMessages = document.querySelectorAll(".error-message");
+    allErrorMessages.forEach((error) => error.remove());
+
+    const allInvalidInputs = document.querySelectorAll(".invalid");
+    allInvalidInputs.forEach((input) => input.classList.remove("invalid"));
+
+    // Reset any other custom validation visuals
+    const customCheckboxes = document.querySelectorAll(
+      '.terms .check input[type="checkbox"]'
+    );
+    customCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    // Give the form a moment to process native reset before checking for remaining issues
+    setTimeout(() => {
+      // Double check for any elements that might need special handling
+      document.querySelectorAll("input, select, textarea").forEach((input) => {
+        clearError(input);
+      });
+    }, 10);
+  });
+
+  const primaryButton = document.querySelector(".btn-primary");
+
+  function addButtonClickEffect(button) {
+    // Reusable function
+    button.addEventListener("click", () => {
+      button.classList.add("clicked");
+      setTimeout(() => {
+        button.classList.remove("clicked");
+      }, 100); // 100-millisecond delay
+    });
+  }
+
+  addButtonClickEffect(primaryButton);
+  addButtonClickEffect(secondaryButton);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const dobInput = document.getElementById("dob");
+  const ageInput = document.getElementById("age");
+
+  // Function to calculate age
+  function calculateAge() {
+    const dobValue = dobInput.value;
+    if (dobValue) {
+      const dob = new Date(dobValue);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+      const dayDiff = today.getDate() - dob.getDate();
+
+      // Adjust age if birthday hasn't occurred yet this year
+      if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+      }
+
+      // Ensure age is valid (between 15 and 99)
+      if (age < 15 || age > 99) {
+        ageInput.value = "";
+        alert("Age must be between 15 and 99 years.");
+      } else {
+        ageInput.value = age;
+      }
+    }
+  }
+
+  // Event listener to update age when DOB is selected
+  dobInput.addEventListener("change", calculateAge);
+
+  // Prevent manual input in the age field
+  ageInput.setAttribute("readonly", true);
+
+    });
+  </script>
+</body>
+</html>
