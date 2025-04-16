@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Fee Form Portal</title>
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="css/contact_style.css">
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="image/icu logo 2.jpeg" id="logo-img" style="border-radius: 70%;"></a>
+            
+            <div class="nav-links" id="navLinks">
+
+                <span class="icon" onclick="hidemenu()">&#10005;</span>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="RegistrationForm.html">Admission</a></li>
+                    <li><a href="courses.html">Course</a></li>
+                    <li><a href="FeesForms.html">Fees</a></li>
+                    <li><a href="Contact_page.html">Contact</a></li>
+                </ul>
+            </div> 
+            <span class="icon" onclick="showmenu()">&#9776;</span>
+        </nav>
+        <div class="wrapper">
+		<div class="r_form_wrap">
+			
+    <style>
+       body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(to bottom, white, #e6e1e1, #a3aade); /* White at top, charcoal at bottom */
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+}
+        
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9); /* Soft white with transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+            color: #222; /* Dark grey text for contrast */
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* White field with slight transparency */
+        }
+        input:hover, select:hover, textarea:hover {
+            border-color: #555; /* Charcoal hover effect */
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #555; /* Charcoal grey */
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: rgb(69, 69, 210);">Student Fee Form Portal</h2>
+        <form id="feeForm">
+            <label style="color: rgb(69, 69, 210);">Full Name:</label>
+            <input type="text" id="fullName" required>
+
+            <label style="color: rgb(69, 69, 210);">Student ID:</label>
+            <input type="text" id="studentId" required>
+
+            <label style="color: rgb(69, 69, 210);">Contact Email:</label>
+            <input type="email" id="email" required>
+
+            <label style="color: rgb(69, 69, 210);">Phone Number:</label>
+            <input type="tel" id="phone" required>
+
+            <label style="color: rgb(69, 69, 210);">Program of Study:</label>
+            <input type="text" id="program" required>
+
+            <label style="color: rgb(69, 69, 210);">Level of Study:</label>
+            <select id="level">
+                <option>Undergraduate</option>
+                <option>Graduate</option>
+            </select>
+
+            <label style="color: rgb(69, 69, 210);">Preferred Payment Method:</label>
+            <select id="paymentMethod">
+                <option>Credit Card</option>
+                <option>Check</option>
+                <option>Online Payment</option>
+            </select>
+
+            <label style="color: rgb(69, 69, 210);">Tuition Fees:</label>
+            <input type="text" id="tuitionFees" required>
+
+            <label style="color: rgb(69, 69, 210);">Transaction ID:</label>
+            <input type="text" id="transactionId" required>
+
+            <label style="color: rgb(69, 69, 210);">Upload Profile Picture:</label>
+            <input type="file" id="profilePicture" accept="image/*">
+
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const studentData = {
+                fullName: document.getElementById("fullName").value,
+                studentId: document.getElementById("studentId").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                program: document.getElementById("program").value,
+                level: document.getElementById("level").value,
+                paymentMethod: document.getElementById("paymentMethod").value,
+                tuitionFees: document.getElementById("tuitionFees").value,
+                transactionId: document.getElementById("transactionId").value,
+                profilePicture: document.getElementById("profilePicture").files[0]?.name || "No file selected"
+            };
+
+            console.log("Submitted Student Data:", studentData);
+            alert("Form submitted successfully!");
+        }
+    </script>
+</body>
+</html>

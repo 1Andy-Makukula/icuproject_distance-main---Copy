@@ -4,6 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Registration Form</title>
+  <link rel="shortcut icon" href="image/favicon.ico" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <link rel="stylesheet" href="css/contact_style.css">
+</head>
+<body>
+  <section class="header">
+      <nav>
+          <a href="index.html"><img src="image/icu logo 2.jpeg" id="logo-img" style="border-radius: 70%;"></a>
+          
+          <div class="nav-links" id="navLinks">
+
+              <span class="icon" onclick="hidemenu()">&#10005;</span>
+              <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="RegistrationForm.html">Admission</a></li>
+                  <li><a href="courses.html">Course</a></li>
+                  <li><a href="FeesForms.html">Fees</a></li>
+                  <li><a href="Contact_page.html">Contact</a></li>
+              </ul>
+          </div> 
+          <span class="icon" onclick="showmenu()">&#9776;</span>
+      </nav>
+      <div class="wrapper">
+ 
+    
   <!-- Internal CSS -->
   <style>
     @import url(https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
@@ -52,6 +78,7 @@
       justify-content: center;
       align-items: center;
       padding: var(--spacing-xl) var(--spacing-lg);
+
     }
 
     @media (prefers-reduced-motion: no-preference) {
@@ -66,14 +93,14 @@
       }
     }
 
-    .wrapper {
+    /*.wrapper {
       max-width: 800px;
       width: 100%;
       background: var(--white);
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
       overflow: hidden;
-    }
+    }*/
 
     /* Add the rest of your CSS here */
     .title h1 {
@@ -677,7 +704,7 @@
 <body>
   <div class="wrapper">
     <div class="title">
-      <h1>Student Registration Form</h1>
+      <h1 style="color: #3f37c9;">Student Registration Form</h1>
     </div>
     <form class="form">
       <!-- Add your form fields here -->
@@ -1366,7 +1393,7 @@
       if (
         parent &&
         !parent.nextElementSibling?.classList.contains("error-message")
-      ) {
+      ) {__
         parent.insertAdjacentElement("afterend", errorMsg);
       }
     } else {

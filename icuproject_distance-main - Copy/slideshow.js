@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const slideCount = slides.length;
   
     function goToSlide(index) {
-      const slideWidth = slides[index].offsetWidth + 20; // slide width + gap (adjust gap if different)
+      const slideWidth = slides[index].offsetWidth + 70; // slide width + gap (adjust gap if different)
       slideshow.scrollTo({
         left: index * slideWidth,
         behavior: 'smooth'
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   
     function nextSlide() {
-      currentIndex = (currentIndex + 1) % slideCount;
+      currentIndex = (currentIndex + 3) % slideCount;
       goToSlide(currentIndex);
     }
   
